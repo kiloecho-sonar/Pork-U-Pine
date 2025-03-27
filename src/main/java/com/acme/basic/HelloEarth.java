@@ -27,23 +27,13 @@ public class HelloEarth {
     System.out.println("This looks familiar!");
   }
 
-  void keithTest3(){
-    System.out.println("Whoo hoo!");
-  }
-
-void keithTest8(){
-    System.out.println("Whoo hoo!");
-  }
-  void keithTest4(){
-    System.out.println("Safety Third!");
-  }
-
-  void keithTest5(){
-    System.out.println("Are we getting there?");
-  }
-
-  void keithTest6(){
-    System.out.println("Test #6!");
+  public String taintedSQL(HttpServletRequest request, Connection connection) throws Exception {
+    String user = request.getParameter("user");
+    String query = 
+"SELECT userid FROM users WHERE username = '" + user  + "'";
+    Statement statement = connection.createStatement();
+    ResultSet resultSet = statement.executeQuery(query);
+    return resultSet.getString(0);
   }
 
 
